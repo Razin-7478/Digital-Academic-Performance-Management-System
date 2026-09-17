@@ -1,97 +1,107 @@
 # DAPMS – Digital Academic Performance Management System
 
-**DAPMS** is a web-based academic management platform built with **Flask** and **SQLite**. It helps educational institutions manage courses, students, teachers, sections, assessments, attendance, materials, grading, and results with role-based access for Admins, Teachers, and Students.
+A modern web-based academic management platform that helps educational institutions manage students, teachers, courses, assessments, attendance, and results efficiently.
+
+Built with **Flask** and **SQLite**, featuring role-based access for **Admin**, **Teacher**, and **Student**.
+
+---
 
 ## Features
 
 ### Admin
-- Create and manage academic terms (semesters)
-- Create / bulk-import students, teachers, and courses (Excel via openpyxl)
+- Create and manage academic terms
+- Create / bulk import students, teachers & courses (Excel support)
 - Create course sections and assign teachers
-- View students, teachers, and sections
-- Reset user passwords and handle password-reset requests
-- Approve and publish section results
+- Reset passwords & handle password reset requests
+- Approve and publish final results
 
 ### Teacher
-- View assigned sections (current + archived)
-- Enroll students by Student ID
-- Create/edit/delete assignments (with optional file upload)
-- Record and view attendance
-- Post announcements and upload course materials
+- Manage assigned sections
+- Enroll students
+- Create, edit & delete assignments (with file upload)
+- Record attendance
+- Post announcements & upload course materials
 - Define grading components and enter marks
-- Submit final results for admin approval
-- Attendance reports
+- Submit results for admin approval
 
 ### Student
-- View enrolled courses (current + archived)
-- Submit assignments (with optional file + notes)
-- View course materials, announcements, and attendance
-- Check performance and final results (with CGPA)
+- View enrolled courses
+- Submit assignments
+- Access course materials and announcements
+- Track attendance and performance
+- View final results and CGPA
 
 ### Common
-- Role-based authentication
-- Profile management and password change
-- Forgot-password request flow
-- File uploads for assignments and materials
-- Modern responsive UI (Tailwind CSS)
+- Secure role-based authentication
+- Profile management
+- Password change & forgot password flow
+- Responsive modern UI (Tailwind CSS)
+
+---
 
 ## Tech Stack
 
-| Component       | Technology          |
-|----------------|---------------------|
-| Backend        | Flask 3.0.3         |
-| Database       | SQLite              |
-| Auth / Security| Werkzeug            |
-| Excel Import   | openpyxl            |
-| Frontend       | HTML + Tailwind CSS |
-| Deployment     | Docker + Gunicorn   |
+| Layer          | Technology              |
+|----------------|-------------------------|
+| Backend        | Flask 3.0.3             |
+| Database       | SQLite                  |
+| Authentication | Werkzeug                |
+| File Import    | openpyxl                |
+| Frontend       | HTML + Tailwind CSS     |
+| Deployment     | Docker + Gunicorn       |
+
+---
 
 ## Project Structure
 
 ```
-dapms_dp_1/
+dapms/
 ├── app/
 │   ├── core/           # Security helpers
-│   ├── managers/       # Business logic (Admin, Teacher, Student, Auth)
+│   ├── managers/       # Business logic
 │   ├── models/         # Data models
-│   ├── routes/         # Blueprints (auth, admin, teacher, student)
+│   ├── routes/         # Auth, Admin, Teacher, Student routes
 │   ├── services/       # ID generation, importers, results
-│   ├── static/         # CSS, images, logo
+│   ├── static/         # Assets
 │   ├── templates/      # Jinja2 templates
 │   ├── uploads/        # Uploaded files
-│   ├── __init__.py     # App factory
-│   └── db.py           # Database setup & seeding
-├── instance/           # SQLite database (created at runtime)
+│   ├── __init__.py
+│   └── db.py
+├── instance/           # SQLite database
 ├── Dockerfile
 ├── requirements.txt
-├── run.py
-└── Password.txt
+└── run.py
 ```
 
-## Installation & Running Locally
+---
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/arman-sulaiman/dapms_dp_1.git
-   cd dapms_dp_1
-   ```
+## Installation
 
-2. **Create a virtual environment (recommended)**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # On Windows: venv\Scripts\activate
-   ```
+### 1. Clone the repository
+```bash
+git clone https://github.com/Razin-7478/dapms_dp_1.git
+cd dapms_dp_1
+```
 
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 2. Create virtual environment
+```bash
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+```
 
-4. **Run the application**
-   ```bash
-   python run.py
-   ```
-   The app starts at `http://127.0.0.1:5000` (debug mode enabled).
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the application
+```bash
+python run.py
+```
+
+Open → [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+---
 
 ## Docker
 
@@ -99,11 +109,10 @@ dapms_dp_1/
 docker build -t dapms .
 docker run -p 8000:8000 dapms
 ```
-Access the app at `http://localhost:8000`.
 
-## Default Demo Accounts
+---
 
-These accounts are automatically seeded on first run:
+## Demo Accounts
 
 | Role    | Email                 | Password     |
 |---------|-----------------------|--------------|
@@ -111,20 +120,24 @@ These accounts are automatically seeded on first run:
 | Teacher | teacher@dapms.local   | teacher123   |
 | Student | student@dapms.local   | student123   |
 
-> **Note:** The `Password.txt` file in the repo may show different passwords. The actual seeded passwords are the ones listed above.
-
-## Database
-
-- SQLite database is automatically created at `instance/dapms.sqlite3` on first run.
-- Tables, relationships, and seed data (demo users, one term, one course, one section) are handled by `app/db.py`.
+---
 
 ## Key Workflows
 
-1. **Admin** creates a term → creates courses → creates sections and assigns teachers → imports/creates students.
-2. **Teacher** enrolls students → posts assignments/materials → records attendance → enters marks → submits results.
-3. **Admin** reviews and approves results.
-4. **Student** views courses, submits work, and checks published results/CGPA.
+1. **Admin** creates term → creates courses → creates sections → assigns teachers
+2. **Teacher** enrolls students → posts assignments → records attendance → enters marks → submits results
+3. **Admin** reviews and publishes results
+4. **Student** submits work and views published results + CGPA
+
+---
+
+## Contributors
+
+- [Mohammad Razin Masud](https://github.com/Razin-7478)
+- [ALI ARMAN SULAIM](https://github.com/arman-sulaiman)
+
+---
 
 ## License
 
-This project is provided as-is for educational and demonstration purposes.
+This project is available for educational and demonstration purposes.
